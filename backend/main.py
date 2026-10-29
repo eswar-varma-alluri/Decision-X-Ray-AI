@@ -13,7 +13,11 @@ load_dotenv()
 ROOT = Path(__file__).resolve().parent
 DB = ROOT / 'history.sqlite3'
 app = FastAPI(title='Decision X-Ray AI API')
-app.add_middleware(CORSMiddleware, allow_origins=['http://localhost:5173','http://127.0.0.1:5173'], allow_credentials=False, allow_methods=['*'], allow_headers=['*'])
+app.add_middleware(CORSMiddleware, allow_origins=[
+    'http://localhost:5173',
+    'http://127.0.0.1:5173',
+    'https://decision-x-ray-ai.vercel.app'
+], allow_credentials=False, allow_methods=['*'], allow_headers=['*'])
 
 class DecisionInput(BaseModel):
     title: str = Field(min_length=3, max_length=150)

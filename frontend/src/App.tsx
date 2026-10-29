@@ -11,7 +11,7 @@ type Comparison={option:string;advantages:string;disadvantages:string;suitabilit
 type Analysis={summary:string;assumptions:Assumption[];risks:Risk[];scenarios:Scenario[];comparisons:Comparison[];tree:{id:string;label:string;parent:string|null}[];recommendation:string;actions:string[];uncertainty:string};
 type RecordItem={id:string;created_at:string;title:string;input:Decision;result:Analysis;mode:string};
 const empty:Decision={title:'',description:'',options:['',''],budget:'',deadline:'',priorities:'',risk_tolerance:'medium'};
-async function api(path:string,init?:RequestInit){const res=await fetch(path,init);const data=await res.json().catch(()=>({}));if(!res.ok)throw new Error(data.detail||'Request failed');return data;}
+async function api(path:string,init?:RequestInit){const res=await fetch(`https://decision-x-ray-ai.onrender.com${path}`,init);const data=await res.json().catch(()=>({}));if(!res.ok)throw new Error(data.detail||'Request failed');return data;}
 function Section({title,children}:{title:string;children:React.ReactNode}){return <section className="panel"><h2>{title}</h2>{children}</section>}
 function DecisionTree({tree}:{tree:Analysis['tree']}){
  const positions=new Map<string,{x:number,y:number}>(); const levels=new Map<string,number>();
